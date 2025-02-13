@@ -8,7 +8,8 @@ To reproduce the issues, follow these steps.
 
 1. Ensure the build environment is Ubuntu 24.04. 
 2. Install ImageMagick via `sudo apt install imagemagick`.
-3. Run the project folders via `./gradlew :app:run`.
+3. Install OpenJDK 21, and Gradle(optional).
+4. Run the project folders via `./gradlew :app:run`.
 
 On Windows, you can install WSL/Ubuntu as the development environment, and use VSCode as development tools, and connect WSL/Ubuntu via `code --remote wsl+Ubuntu /home/yourname/projects`.
 
