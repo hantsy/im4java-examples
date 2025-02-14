@@ -14,30 +14,20 @@ import magick.MagickImage;
 
 public class App {
     public static byte[] optimizeAndResize(byte[] inputImageBytes, int width, int height)
-            throws MagickException, IOException {
+            throws Exception {
         System.out.println("Input image size: " + inputImageBytes.length);
         // Read the image from the byte array
-        Path inputFile = Files.createTempFile("inputTemp", ".jpg");
-        Files.write(inputFile, inputImageBytes);
-        ImageInfo imageInfo = new ImageInfo(inputFile.toString());
-        MagickImage image = new MagickImage(imageInfo);
+        ImageInfo imageInfo = new ImageInfo();
+        MagickImage image = new MagickImage(imageInfo, inputImageBytes);
 
         // Resize the image
         MagickImage resizedImage = image.scaleImage(width, height);
 
         // Write the resized image to the output byte array
-        Path outputFile = Files.createTempFile("outputTemp", ".jpg");
-        ImageInfo outputImageInfo = new ImageInfo(outputFile.toString());
-        resizedImage.writeImage(outputImageInfo);
+        imageInfo.setQuality(80); // Set the quality to 80%
+        var outputBytes = resizedImage.imageToBlob(imageInfo);
 
-        // Return the output byte array
-        var outputBytes = Files.readAllBytes(outputFile);
         System.out.println("Output image size: " + outputBytes.length);
-
-        // Clean up
-        Files.delete(inputFile);
-        Files.delete(outputFile);
-
         return outputBytes;
     }
 
