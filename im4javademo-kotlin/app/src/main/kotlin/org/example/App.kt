@@ -16,6 +16,8 @@ import java.nio.file.Paths
 
 object ImageOptimizer {
 
+    // This does not work in Kotlin
+    // see: https://stackoverflow.com/questions/79435864/im4java-throws-exception-convert-im6-q16-no-decode-delegate-for-this-image-form
     fun optimizeAndResize(inputBytes: ByteArray, resizeTo: Int = 128): ByteArray =
         ByteArrayInputStream(inputBytes).use { inputStream ->
 
@@ -62,6 +64,7 @@ object ImageOptimizer {
             }
         }
 
+    // alternatively, use temp files instead of the input/output streams, it works
     fun optimizeAndResize(inputBytes: ByteArray, format: String, resizeTo: Int = 128): ByteArray =
         ByteArrayInputStream(inputBytes).use { inputStream ->
             // Read the input image
@@ -114,8 +117,7 @@ object ImageOptimizer {
 fun main() {
     val inputBytes = Files.readAllBytes(Paths.get("test.jpg"))
     println("input test file: ${inputBytes.size}")
-    val result = ImageOptimizer.optimizeAndResize(inputBytes)
-
+    val result = ImageOptimizer.optimizeAndResize(inputBytes, "jpg")
     val file = File("out.jpg")
     Files.write(file.toPath(), result)
     println("output file: ${file.path}, ${file.length()}")
