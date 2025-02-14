@@ -11,7 +11,9 @@ The example projects demonstrate ImageMagick and Java integration with IM4java a
 There is a wired issue I found using IM4java in a Kotlin project, check [the original post](https://stackoverflow.com/questions/79435864/im4java-throws-exception-convert-im6-q16-no-decode-delegate-for-this-image-form) on StackOverflow.
 
 ## Prerequisites
-All these projects used Gradle as a building tool and tested against Java 21 on Ubuntu 24.04. Due to both IM4Java and JMagicks depending on `ImageMagick`, before running the projects, you have to install `openjdk-21-jdk`, `imagemagick`, `libjmagick6-jni` packages.
+All these projects used Gradle as a building tool and tested against Java 21 on Ubuntu 24.04. 
+
+Due to both IM4Java and JMagicks depending on `ImageMagick`, before running the projects, you have to install `openjdk-21-jdk`, `imagemagick`, `libjmagick6-jni` packages.
 
 ```bash
 sudo apt install openjdk-21-jdk imagemagick libjmagick-jni
