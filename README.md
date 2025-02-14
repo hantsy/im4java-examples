@@ -1,4 +1,4 @@
-# im4java-examples
+# ImageMagick Java Integration Examples
 
 The example projects demonstrate ImageMagick and Java integration with IM4java and JMagick.
 
@@ -24,10 +24,10 @@ sudo apt install openjdk-21-jdk imagemagick libjmagick-jni
 3. Open a terminal, switch to the project root folder, run `./gradlew clean :app:run`.
 
 On Windows, you can install WSL/Ubuntu as the development environment, and use VSCode as the code editor.
-* Enable Hyper-V virtual manager in the Windows system.
+* Enable Hyper-V virtual manager in the Windows components.
 * Install `WSL` and `Ubuntu` from the Microsoft Store or `winget` command line.
 * Start `Ubuntu` from the start menu and initialize the Ubuntu system. Follow the above guide to install the required packages in Ubuntu.
-* Install VSCode with Remote Development extension pack.
-* Open a terminal, such as PowerShell, connect WSL/Ubuntu via `code --remote wsl+Ubuntu /home/yourname/projects`.
+* Install VSCode with `Java Extension Pack` and `Remote Development Extension Pack`.
+* Open a terminal, such as PowerShell, and connect WSL/Ubuntu via the command `code --remote wsl+Ubuntu /home/yourname/projects`.
 
 
