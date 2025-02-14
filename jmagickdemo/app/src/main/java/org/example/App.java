@@ -3,24 +3,24 @@
  */
 package org.example;
 
-import magick.ImageInfo;
-import magick.MagickImage;
-import magick.MagickException;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import magick.ImageInfo;
+import magick.MagickException;
+import magick.MagickImage;
 
 public class App {
     public static byte[] optimizeAndResize(byte[] inputImageBytes, int width, int height)
             throws MagickException, IOException {
-
+        System.out.println("Input image size: " + inputImageBytes.length);
         // Read the image from the byte array
-        ImageInfo imageInfo = new ImageInfo();
-        MagickImage image = new MagickImage(imageInfo, inputImageBytes);
+        Path inputFile = Files.createTempFile("inputTemp", ".jpg");
+        Files.write(inputFile, inputImageBytes);
+        ImageInfo imageInfo = new ImageInfo(inputFile.toString());
+        MagickImage image = new MagickImage(imageInfo);
 
         // Resize the image
         MagickImage resizedImage = image.scaleImage(width, height);
@@ -30,15 +30,19 @@ public class App {
         ImageInfo outputImageInfo = new ImageInfo(outputFile.toString());
         resizedImage.writeImage(outputImageInfo);
 
-
         // Return the output byte array
         var outputBytes = Files.readAllBytes(outputFile);
+        System.out.println("Output image size: " + outputBytes.length);
+
+        // Clean up
+        Files.delete(inputFile);
         Files.delete(outputFile);
+
         return outputBytes;
     }
 
     public static void main(String[] args) throws Exception {
-               // Example usage
+        // Example usage
         byte[] inputImage = Files.readAllBytes(Paths.get("test.jpg")); // Load your image as byte array
         int width = 800;
         int height = 600;
